@@ -2,13 +2,13 @@
 
 An important milestone in a computer vision approach to autonomous vehicles is finding lane markings on the road. Here, we describe a process to detect lane in night environment.
 
-###Challenges
+### Challenges
 · low light intensity
 · difficult to tune the parameters for various light intensity
 · poor edge detection
 · Shadows, Sudden high intensity car headlights
 
-##Our Approach
+## Our Approach
 Our method is described in those Steps:
 1. We perform gamma correction for each video frame to set the light intensity
 2. Region of Interest is cropped from the image, so that we can only look for lanes on ROI part only. It helps to reduce the computational cost and increase the fps.
@@ -19,7 +19,7 @@ Our method is described in those Steps:
 7. Detected lines are clustered using DBSCAN as we want only lines across lanes only.
 8. Kalman Filtering is applied for better lane detection. Here, we applied as a linear estimator for the clustered lines for the lanes to make it stable and free from any offset errors.  
 
-###Dependencies
+### Dependencies
 Python 3.5
 Numpy
 OpenCV-Python
@@ -27,9 +27,8 @@ Matplotlib
 sklearn
 Scipy
 
-####Gamma Correction
+#### Gamma Correction
 Here, Gamma Correction is to set the intensity values. It uses a parameter to tune it and also set the intensity level. Basics of gamma correction is here.
- 
  
 Code:-
 def gamma_correction(RGBimage, correct_param = 0.35,equalizeHist = False):
@@ -60,7 +59,7 @@ def gamma_correction(RGBimage, correct_param = 0.35,equalizeHist = False):
     output = cv2.merge((blue,green,red))
     return output
  
-####Region of Interest
+#### Region of Interest
 Using following code cropped the each video frame to consider only portion for lane detection. Due to this, sudden high illumination due to streetlights, other car headlights can be avoided. This also increase the fps a bit.  
 Code:-
 def region_of_interest(img, vertices):
@@ -77,10 +76,10 @@ def region_of_interest(img, vertices):
     return masked_image
  
 
-####Bilateral filter
+#### Bilateral filter
 A bilateral filter is a non-linear, edge-preserving, and noise-reducing smoothing filter for images. It replaces the intensity of each pixel with a weighted average of intensity values from nearby pixels.
 
-####Hough transformation
+#### Hough transformation
 In this section, we used Hough transformation and some modification to remove horizontal detected lines and lines only oriented to the lane.
 Code:
 def hough_transform(original, gray_img, threshold, discard_horizontal = 0.4):
@@ -191,7 +190,7 @@ class LaneTracker:
             return None
  
  
-##Conclusion:
+## Conclusion:
 For our dataset, this algorithm perform quite. For very low intensity lights it can be able to detect lanes using Kalman Filter. Detected lane markers are quite stable and robust to intensity and noise variation.
  
                                                              
