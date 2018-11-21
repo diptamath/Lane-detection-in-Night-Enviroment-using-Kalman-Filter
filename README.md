@@ -1,4 +1,4 @@
-# Lane-detection-in-Night-Enviroment-using-Kalman-Filter
+# Lane-detection-in-Night-Environment-using-Kalman-Filter
 
 An important milestone in a computer vision approach to autonomous vehicles is finding lane markings on the road. Here, we describe a process to detect lane in night environment.
 
